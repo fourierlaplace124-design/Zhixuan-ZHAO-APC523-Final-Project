@@ -1,32 +1,43 @@
-# Project Code Overview
-
+# Final Project
 ## Code Architecture
 
-The submission contains a finite-difference workflow for the backward-facing step flow problem.
-
-- `mesh_generator.py`: Builds the structured Cartesian mesh, marks fluid/solid/inlet/outlet/wall regions, and stores velocity and pressure fields.
-- `solver.py`: Implements the finite-difference incompressible Navier-Stokes solver using an explicit time step and projection method.
-- `batch_experiment.py`: Sets up the backward-facing step geometry, grid sizes, Reynolds numbers, solver parameters, and batch execution.
-- `mms_verification.py`: Runs the manufactured-solution check for the spatial discretization.
-- `run_smooth_region_convergence.py`: Runs the smooth-region convergence analysis.
-- `run_reynolds_corner_density.py`: Runs the Reynolds-number error-localization analysis.
-- `demo_corner_rational_enrichment.py`: Runs the local corner enrichment demonstration.
-- `plot_stability_region.py`: Generates the stability-region plots.
-- `figures/`: Contains the figures used by the report and presentation.
-- `final_report_academic.pdf`: Final written report.
+- `mesh_generator.py`: Builds the structured mesh and marks boundary/solid regions.
+- `solver.py`: Finite-difference incompressible Navier-Stokes solver.
+- `batch_experiment.py`: Shared setup for the backward-facing step experiments.
+- `mms_verification.py`: Manufactured-solution verification.
+- `plot_stability_region.py`: Stability-region plots.
+- `run_smooth_region_convergence.py`: Smooth-region convergence analysis.
+- `run_reynolds_corner_density.py`: Reynolds-number error-localization analysis.
+- `demo_corner_rational_enrichment.py`: Corner enrichment analysis.
+- `run_adroit.sh`: Bash entry point for running the programs.
+- `adroit_job.slurm`: Optional Slurm job template.
 
 ## Environment
 
-Required Python version:
-
 ```bash
-Python 3.7+
+module purge
+module load anaconda3/2025.6
+conda create -y -n apc523-fdm -c conda-forge python=3.11 numpy scipy matplotlib
+conda activate apc523-fdm
 ```
 
-Required packages:
+## Clone
 
 ```bash
-numpy
-scipy
-matplotlib
+git clone <repository-url>
+cd <repository-name>/Submit
 ```
+
+## Run Each Program
+
+```bash
+bash run_adroit.sh compile
+bash run_adroit.sh mms
+bash run_adroit.sh stability
+bash run_adroit.sh smooth
+bash run_adroit.sh reynolds
+bash run_adroit.sh enrichment
+bash run_adroit.sh full
+```
+
+Run `reynolds` before `enrichment` on a fresh clone.
