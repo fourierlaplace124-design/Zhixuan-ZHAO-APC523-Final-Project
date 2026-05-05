@@ -23,7 +23,7 @@ from batch_experiment import BatchExperimentManager  # noqa: E402
 from solver import NavierStokesSolver  # noqa: E402
 
 
-REYNOLDS_NUMBERS = [2, 8, 20, 80, 200, 800]
+REYNOLDS_NUMBERS = [2, 8, 20, 80, 100, 200, 800]
 COARSE_GRID = (160, 64)
 REFERENCE_GRID = (240, 96)
 MAX_TIME = 30.0
